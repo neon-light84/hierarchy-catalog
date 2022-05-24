@@ -1,0 +1,27 @@
+ul {
+    list-style: none;
+}
+span.item-name.collapsed>span.plus,
+span.item-name>span.minus {
+    display: inline-block;
+    width: 15px;
+}
+span.item-name.collapsed+ul {
+    display: none;
+}
+span.item-name.collapsed>span.minus {
+    display: none;
+}
+span.item-name>span.plus {
+    display: none;
+}
+span.item-name>.text {
+    margin-left: 10px;
+}
+span.item-name>span {
+    cursor: pointer;
+}
+.main-container {
+    display: -webkit-flex;
+    display: flex;
+}

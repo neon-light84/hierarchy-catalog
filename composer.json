@@ -1,0 +1,21 @@
+{
+    "name": "pavel/ierarchi-sructure",
+    "description": "ierarchi-sructure",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "neon-light84",
+            "email": "goroshnikov.pavel@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*",
+        "ext-redis": "*"
+    }
+}
