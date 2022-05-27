@@ -5,3 +5,14 @@ form.register .fields {
     -webkit-flex-direction: column;
     flex-direction: column;
 }
+
+#current-data>div {
+    margin-bottom: 15px;
+}
+
+#list-catalog .new-parent {
+    display: none;
+}
+#list-catalog.select-new-parent .new-parent {
+    display: initial;
+}

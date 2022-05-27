@@ -1,3 +1,5 @@
+// Логика для обоих страниц. Здесь не должно быть работы с DOM
+
 // Что бы в эксплорере и виндовом сафари, работало грамотное всплытие.
 if (!HTMLElement.prototype.matches) {
     if (HTMLElement.prototype.webkitMatchesSelector)
@@ -39,7 +41,7 @@ function generateDomHierarchy(dataArr, forAdmin) {
             (forAdmin ? '<span class="new-parent">New parent</span>' : '');
         domElemLi.appendChild(domElemSpan);
         if (dataArr[i].childs.length > 0) {
-            domElemLi.appendChild(generateDomHierarchy(dataArr[i].childs));
+            domElemLi.appendChild(generateDomHierarchy(dataArr[i].childs, forAdmin));
         }
         domElemUl.appendChild(domElemLi);
     }

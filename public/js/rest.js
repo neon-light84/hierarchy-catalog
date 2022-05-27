@@ -2,7 +2,7 @@
 
 var endPointCrud = 'http://ierarchi.local.su/rest/admin.php';
 
-function restCreate(parent, name, description) {
+function restCreate(name, description, parent) {
     return fetch(
         endPointCrud + `?resource=catalog&parent=${parent}&name=${name}&description=${description}&token=${token}`,
         {method: 'POST'}
@@ -14,7 +14,7 @@ function restCreate(parent, name, description) {
             return data;
         })
         .catch((err)=>{
-            console.warn("Вот такая ошибка: ", err);
+            return "Вот такая ошибка: " + err;
         });
 }
 
@@ -62,10 +62,12 @@ function restDelete(id) {
             return data;
         })
         .catch((err)=>{
-            console.warn("Вот такая ошибка: ", err);
+            return "Вот такая ошибка: " + err;
         });
 }
 
+/*
+// пока не требуется. Изначально, хотел перемещение элемента по дереву, сделать другим методом.
 function restMove(id, newParent) {
     fetch(
         endPointCrud + `?resource=catalog&id=${id}&new-parent=${newParent}&token=${token}`,
@@ -81,3 +83,4 @@ function restMove(id, newParent) {
             console.warn("Вот такая ошибка: ", err);
         });
 }
+*/

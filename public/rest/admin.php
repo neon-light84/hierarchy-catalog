@@ -12,7 +12,12 @@ switch (strtoupper($httpMethod)) {
         break;
     }
     case 'POST': {
-        echo 'POST';
+        $res = CrudCatalog::create([
+            'parent' => $_GET['parent'],
+            'name' => $_GET['name'],
+            'description' => $_GET['description'],
+        ]);
+        echo $res ? "Данные добавлены" : "Ошибка добавления";
         break;
     }
     case 'PUT': {

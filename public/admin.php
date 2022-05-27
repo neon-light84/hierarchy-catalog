@@ -30,27 +30,32 @@ require_once '../index.php';
     <p><a href="?logout=yes">Выйти</a></p>
 
     <div class="catalog-container">
-        <div id="list-catalog" class="select-new-parent">
+        <div id="list-catalog" class="">
         </div>
         <div id="current-data" data-id="">
             <div>
                 <span>Родитель:</span>
                 <br>
                 <input type="text" id="js-parent" disabled="disabled">
+                <label><input type="checkbox" id="js-is-change-parent"> Изменить родителя</label>
+                <input id="js-add-in-root" type="button" value="Добавить в корень">
+
             </div>
             <div>
                 <span>Название:</span>
                 <br>
                 <input type="text" id="js-name">
             </div>
-            <div style="margin-top: 20px">
+            <div>
                 <span>Данные:</span>
                 <br>
                 <textarea id="js-description" rows="10" cols="70"></textarea>
             </div>
-            <div style="margin-top: 20px">
+            <div>
                 <input type="button" id="js-update" value="Сохранить">
                 <input type="button" id="js-delete" value="Удалить">
+                <input type="button" id="js-form-insert" value="Форма добавления нового">
+                <input type="button" id="js-insert" style="display: none" value="Добавить новый">
             </div>
             <input type="hidden" id="js-id">
         </div>
@@ -62,52 +67,7 @@ require_once '../index.php';
     </script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/rest.js"></script>
-
-    <script type="text/javascript">
-        var domListCatalog = document.getElementById('list-catalog');
-        addListenerWithTarget('click', domListCatalog, 'span.item-name>.text', function (elem) {
-            document.getElementById('js-description').value = elem.closest('span.item-name').dataset.description;
-            document.getElementById('js-name').value = elem.closest('span.item-name').dataset.name;
-            document.getElementById('js-id').value = elem.closest('span.item-name').dataset.id;
-            document.getElementById('js-parent').value = elem.closest('span.item-name').dataset.parent;
-        });
-
-        addListenerWithTarget('click', domListCatalog, 'span.item-name>.plus,span.item-name>.minus', function (elem) {
-            elem.closest('span.item-name').classList.toggle('collapsed')
-        });
-
-        function reloadCatalogTree() {
-            restReadAll().then(function (textBody) {
-                domListCatalog.innerHTML = '';
-                domListCatalog.appendChild(generateDomHierarchy(JSON.parse(textBody), true));
-
-            });
-        }
-
-        reloadCatalogTree();
-
-        document.getElementById('js-update').onclick = function () {
-            restUpdate(
-                document.getElementById('js-id').value,
-                document.getElementById('js-name').value,
-                document.getElementById('js-description').value,
-                document.getElementById('js-parent').value,
-            ).then((text) => {
-                reloadCatalogTree();
-                window.alert(text);
-            });
-        }
-
-        document.getElementById('js-delete').onclick = function () {
-            restDelete(
-                document.getElementById('js-id').value,
-            ).then((text) => {
-                reloadCatalogTree();
-                window.alert(text);
-            });
-        }
-
-    </script>
+    <script type="text/javascript" src="js/admin_dom.js"></script>
 <? //Конец, Основной код для авторизованного админа?>
 
 <? else: ?>

@@ -19,7 +19,8 @@ class CrudCatalog
         }
     }
 
-    public static function  insert ($data) {
+    public static function  create ($data) {
+        if (!$data['parent'] || (int)$data['parent'] < 0) $data['parent'] = null;
         $dbConnection = Connections::getInstance()->getMysql();
         $sth = $dbConnection->prepare('INSERT INTO `catalog` (`parent`, `name`, `description`) 
             VALUES (:parent, :name, :description );'
@@ -27,10 +28,11 @@ class CrudCatalog
         $sth->bindValue(':parent', $data['parent']);
         $sth->bindValue(':name', $data['name']);
         $sth->bindValue(':description', $data['description']);
-        $sth->execute();
+        return $sth->execute();
     }
 
     public static function  update ($data) {
+        if ($data['parent'] == $data['id']) return false;
         $dbConnection = Connections::getInstance()->getMysql();
         $sth = $dbConnection->prepare('UPDATE `catalog` 
             SET `parent` = :parent, `name` = :name, `description` = :description
