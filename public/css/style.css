@@ -1,3 +1,4 @@
+/*Общие стили*/
 ul {
     list-style: none;
 }
@@ -21,7 +22,7 @@ span.item-name>.text {
 span.item-name>span {
     cursor: pointer;
 }
-.main-container {
+.catalog-container {
     display: -webkit-flex;
     display: flex;
 }

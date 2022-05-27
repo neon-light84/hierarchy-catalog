@@ -15,6 +15,9 @@ final class Connections
     private static $connectionMysql = null;
     private static $connectionRedis = null;
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         if (static::$instance === null) {
