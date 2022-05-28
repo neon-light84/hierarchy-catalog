@@ -65,9 +65,6 @@ require_once '../index.php';
     </div>
 
 
-    <script type="text/javascript">
-        var token = '<?=isset($_SESSION['token']) ? $_SESSION['token'] : '';?>';
-    </script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/rest.js"></script>
     <script type="text/javascript" src="js/admin_dom.js"></script>

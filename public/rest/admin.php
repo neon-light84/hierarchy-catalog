@@ -1,8 +1,9 @@
 <?php
 require_once  '../../index.php';
 use App\Services\CrudCatalog;
+use App\Services\Auth;
 
-if ($_SESSION['token'] != $_GET['token']) exit("Не авторизованы");
+if (!Auth::isAdminAuth()) exit("Не авторизованы. Перезагрузите страницу. ");
 
 $httpMethod = $_SERVER["REQUEST_METHOD"];
 
