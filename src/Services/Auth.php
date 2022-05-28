@@ -18,7 +18,7 @@ class Auth
         if (!$userFields) {
             return false;
         }
-        if ($userFields['password'] == Admins::getHash($password)) {
+        if ($userFields['password'] === Admins::getHash($password)) {
             // логин/пароль верные
             $_SESSION['user_id'] = $userFields['id'];
             $_SESSION['token'] = static::generateString();
@@ -30,7 +30,7 @@ class Auth
     }
 
     public static function isAdminAuth() {
-        return $_SESSION['user_id'] && $_SESSION['user_id'] > 0;
+        return isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0;
     }
 
     private static function generateString($strength = 32) {

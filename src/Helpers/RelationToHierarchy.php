@@ -30,7 +30,7 @@ class RelationToHierarchy
         $idDel = [];
 
         foreach (static::$relationData as $key => $item) {
-            if ($item['parent'] == $curParentId) {
+            if ((int)$item['parent'] === (int)$curParentId) {
                 $idDel[] = $key;
                 $returned[] = ['self' => $item, 'childs' => static::recurse($item['id'])];
             }

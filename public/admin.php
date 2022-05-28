@@ -17,14 +17,17 @@ use App\Services\Auth;
 
 require_once '../index.php';
 ?>
-<? if ($_GET['logout'] == 'yes'): ?>
+<? if (isset($_GET['logout']) && $_GET['logout'] === 'yes'): ?>
     <?php
     Auth::logout();
     ?>
     <h2>Вы вышли из админки</h2>
     <p><a href="?">Авторизоваться</a></p>
     <p><a href="user.php">Режим только просмотра</a></p>
-<? elseif (Auth::isAdminAuth() || Auth::login($_POST['login'], $_POST['password'])): ?>
+<? elseif (
+        Auth::isAdminAuth() ||
+        (isset($_POST['login']) && isset($_POST['password']) && Auth::login($_POST['login'], $_POST['password']))
+): ?>
 <? //Основной код для авторизованного админа?>
     <h2>Вы админ</h2>
     <p><a href="?logout=yes">Выйти</a></p>
@@ -32,12 +35,12 @@ require_once '../index.php';
     <div class="catalog-container">
         <div id="list-catalog" class="">
         </div>
-        <div id="current-data" data-id="">
+        <div id="current-data" class="state-initial">
             <div>
                 <span>Родитель:</span>
                 <br>
                 <input type="text" id="js-parent" disabled="disabled">
-                <label><input type="checkbox" id="js-is-change-parent"> Изменить родителя</label>
+                <label class="is-change-parent"><input type="checkbox" id="js-is-change-parent"> Изменить родителя</label>
                 <input id="js-add-in-root" type="button" value="Добавить в корень">
 
             </div>
@@ -55,7 +58,7 @@ require_once '../index.php';
                 <input type="button" id="js-update" value="Сохранить">
                 <input type="button" id="js-delete" value="Удалить">
                 <input type="button" id="js-form-insert" value="Форма добавления нового">
-                <input type="button" id="js-insert" style="display: none" value="Добавить новый">
+                <input type="button" id="js-insert" value="Добавить новый">
             </div>
             <input type="hidden" id="js-id">
         </div>
@@ -63,7 +66,7 @@ require_once '../index.php';
 
 
     <script type="text/javascript">
-        var token = '<?=$_SESSION['token']?>';
+        var token = '<?=isset($_SESSION['token']) ? $_SESSION['token'] : '';?>';
     </script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/rest.js"></script>
@@ -72,7 +75,7 @@ require_once '../index.php';
 
 <? else: ?>
     <h2>Авторизуйтесь пожалуйста</h2>
-    <? if ($_POST['login']): ?>
+    <? if (isset($_POST['login'])): ?>
     <p>Не правильный логин или пароль</p>
 <? endif; ?>
     <form action="#" method="post" class="register">

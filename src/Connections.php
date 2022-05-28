@@ -27,6 +27,9 @@ final class Connections
         return static::$instance;
     }
 
+    /**
+     * @return \PDO|null
+     */
     public function getMysql () {
         if (static::$connectionMysql === null) {
             $db = MainConfig::$dbMysql;

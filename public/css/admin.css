@@ -16,3 +16,14 @@ form.register .fields {
 #list-catalog.select-new-parent .new-parent {
     display: initial;
 }
+
+.catalog-container .state-initial #js-insert {
+    display: none;
+}
+
+.catalog-container .state-insert #js-update,
+.catalog-container .state-insert #js-delete,
+.catalog-container .state-insert #js-form-insert,
+.catalog-container .state-insert .is-change-parent {
+    display: none;
+}

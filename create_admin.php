@@ -1,7 +1,6 @@
 <?php
 
 use App\Connections;
-use App\Helpers\Admins;
 
 require_once 'index.php';
 
